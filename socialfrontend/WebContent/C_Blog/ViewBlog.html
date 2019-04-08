@@ -1,0 +1,47 @@
+3
+<style>
+label {
+	color: Cyan;
+}
+
+h2 {
+	color: black;
+}
+
+p {
+	color: black;
+}
+
+hr {
+	display: block;
+	margin-top: 0.6em;
+	margin-bottom: 0.6em;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: inset;
+	border-width: 2px;
+}
+</style>
+
+
+<div class="container" ng-controller="BlogController">
+	<p ng-repeat="blog in blogdata">
+		<font size="6" color="blue"><b>{{blog.blogName}}</b></font> &nbsp
+		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp created by <i><b>{{blog.loginname}}</b>
+			on {{blog.createdate}}</i> <img src="Images/imd.jpeg" alt="Avatar"
+			class="img-thumbnail" style="height: 30%; width: 30%"><br>
+		<br> <font size="5">{{blog.blogDesc}}</font>
+		<button type="button" class="btn btn-success btn-sm"
+			ng-click="incrementLikes(blog.blogId)">
+			<span class="glyphicon glyphicon-thumbs-up"></span> {{blog.likes}}
+		</button>
+		<button type="button" class="btn btn-danger btn-sm"
+			ng-click="incrementDisLikes(blog.blogId)">
+			<span class="glyphicon glyphicon-thumbs-down"></span>
+			{{blog.dislikes}}
+		</button>
+		<button type="button" ng-click="showComment(blog.blogId)"
+			class="btn btn-info btn-sm">Comments</button>
+	</p>
+	<hr>
+</div>

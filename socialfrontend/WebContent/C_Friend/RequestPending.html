@@ -1,0 +1,26 @@
+<style>
+table {
+	color: black;
+}
+</style>
+<div class="container" ng-controller="FriendController">
+
+	<table width="50%" align="center" cellpadding="20">
+
+		<tr ng-repeat="friend in pendingFriendList">
+
+			<td><img
+				src="http://localhost:8080/socialmiddleware/getImage/{{friend.loginname}}"
+				class="img-circle" width="100" height="100" /> {{friend.loginname}}
+			</td>
+
+			<td><input type="button" value="Unfriend" class="btn btn-danger"
+				ng-click="unfriend(friend.friendId)" /></td>
+			<td><input type="button" value="Accept" class="btn btn-Success"
+				ng-click="accept(friend.friendId)" /></td>
+		</tr>
+
+	</table>
+
+
+</div>

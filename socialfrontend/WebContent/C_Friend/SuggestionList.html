@@ -1,0 +1,25 @@
+<style>
+table {
+	color: black;
+}
+</style>
+<div class="container" ng-controller="FriendController">
+
+	Welcome
+
+	<table width="50%" align="center" cellpadding="20">
+
+		<tr ng-repeat="friend in suggestedFriendList">
+
+			<td><img
+				src="http://localhost:8080/socialmiddleware/getImage/{{friend.loginname}}"
+				class="img-circle" width="100" height="100" /> {{friend.username}}</td>
+
+			<td><input type="button" value="Send Request"
+				class="btn btn-success"
+				ng-click="sendFriendRequest(friend.loginname)" /></td>
+		</tr>
+
+	</table>
+
+</div>

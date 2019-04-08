@@ -1,0 +1,37 @@
+<style>
+h1 {
+	color: DarkBlue;
+}
+
+form {
+	color: black;
+}
+
+label {
+	color: DarkMagenta;
+}
+
+input {
+	color: black;
+}
+</style>
+<div class="container">
+<div class="col-lg-12 well" ng-controller="UserController">
+	<div class="row">
+	<center>	<h1>User Profile</h1></center>
+		<form enctype="multipart/form-data" method="post"
+			action="http://localhost:8080/socialmiddleware/doUpload">
+			<div class="col=sm-6 form-group">
+				<label>Upload Picture</label>
+			</div>
+			<div class="col=sm-6 form-group">
+				<input type="file" name="file" id="file" />
+			</div>
+			<center>
+				<input type="submit" value="Upload" class="btn btn-sm btn-info" />
+			</center>
+		</form>
+	</div>
+</div>
+
+</div>

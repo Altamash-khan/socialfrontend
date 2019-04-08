@@ -1,0 +1,312 @@
+<html>
+<head>
+<title>Social Collab</title>
+<!-- Angular Files -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-cookies.js"></script>
+<!-- Route configuration files -->
+<script src="RouteConfig.js"></script>
+<!-- Controllers -->
+<script src="C_Blog/BlogController.js"></script>
+<script src="C_Blog/BlogCommentController.js"></script>
+<script src="C_Forum/ForumController.js"></script>
+<script src="C_Forum/ForumCommentController.js"></script>
+<script src="C_UserDetail/UserController.js"></script>
+<script src="C_Friend/FriendController.js"></script>
+<script src="C_Chat/ChatController.js"></script>
+<script src="C_Job/JobController.js"></script>
+<script src="C_Chat/ChatService.js"></script>
+
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+	crossorigin="anonymous">
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.3/lodash.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+
+</head>
+<style>
+body {
+	background-image: url("Images/photo1.jpg");
+}
+
+#carousel-example-generic .item img {
+	display: block;
+	width: 100%;
+	height: 300px;
+}
+
+footer {
+	padding: 10px;
+	text-align: center;
+	background-color: rgb(0, 102, 204);
+}
+
+.thumb {
+	display: block;
+	width: 100%;
+	margin: 0;
+}
+
+hr {
+	display: Cyan;
+	margin-top: 0.6em;
+	margin-bottom: 0.6em;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: inset;
+	border-width: 3px;
+}
+
+#img1 {
+	border-radius: 50%;
+}
+</style>
+<body ng-app="MyApp">
+
+	<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+			<div class="navbar-header">
+<a class="navbar-brand" href="#/Home"><img src="Images/logo.jpg"class="img-circle" align="middle" alt="logo"style="height: 50px; width: 50px"> </a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li>
+				<li><a class="nav-link" href="#/Home"
+					ng-show="currentUser==undefined"><span
+						class="glyphicon glyphicon-home"></span> Home</a> <a class="nav-link"
+					href="#/userhome" ng-hide="currentUser==undefined"><span
+						class="glyphicon glyphicon-home"></span> Home</a></li>
+				<li><a class="nav-link" href="#/login"
+					ng-show="currentUser==undefined"><span
+						class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<li><a class="nav-link" href="#/register"
+					ng-show="currentUser==undefined"><span
+						class="glyphicon glyphicon-user"></span> Register</a></li>
+
+				<li class="dropdown" ng-hide="currentUser==undefined"><a
+					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+						class="glyphicon glyphicon-education"></span>Blogs <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li
+							ng-hide="currentUser==undefined||currentUser.role=='ROLE_ADMIN'"><a
+							class="nav-link" href="#/AddBlog">Add Blog</a></li>
+						<li
+							ng-hide="currentUser==undefined||currentUser.role=='ROLE_USER'"><a
+							class="nav-link" href="#/ManageBlog">Manage Blog</a></li>
+						<li
+							ng-hide="currentUser.role=='ROLE_ADMIN'||currentUser==undefined"><a
+							class="nav-link" href="#/ViewBlog">View Blog</a></li>
+					</ul></li>
+				<li class="dropdown" ng-hide="currentUser==undefined"><a
+					class="dropdown" class="dropdown-toggle" data-toggle="dropdown"
+					href="#"><span class="glyphicon glyphicon-education"></span>
+						Forums<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li
+							ng-hide="currentUser==undefined||currentUser.role=='ROLE_ADMIN'"><a
+							class="nav-link" href="#/Forum">Display Forums</a></li>
+						<li
+							ng-hide="currentUser==undefined||currentUser.role=='ROLE_ADMIN'"><a
+							class="nav-link" href="#/AddForum">Add Forum</a></li>
+						<li
+							ng-hide="currentUser.role=='ROLE_USER'||currentUser==undefined"><a
+							class="nav-link" href="#/ManageForum">Manage Forums</a></li>
+					</ul></li>
+				<li ng-hide="currentUser==undefined" class="dropdown"><a
+					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+						class="glyphicon glyphicon-certificate"></span> Jobs<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+
+						<li
+							ng-hide="currentUser==undefined||currentUser.role=='ROLE_ADMIN'"><a
+							href="#/Job">Browse Jobs</a></li>
+						<li
+							ng-hide="currentUser==undefined||currentUser.role=='ROLE_USER'"><a
+							href="#/AddJob">Add Job</a></li>
+						<li
+							ng-hide="currentUser==undefined||currentUser.role=='ROLE_USER'"><a
+							href="#/ManageJob">Manage Job</a></li>
+						<li
+							ng-hide="currentUser==undefined||currentUser.role=='ROLE_ADMIN'"><a
+							href="#/ApplyingJob">Job Application</a></li>
+
+					</ul></li>
+				<li class="dropdown"
+					ng-hide="currentUser==undefined||currentUser.role=='ROLE_ADMIN'">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span
+						class="fas fa-user-friends"></span>Friend<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a class="nav-link" href="#/friendlist">Friend List</a></li>
+						<li><a class="nav-link" href="#/requestpending">Pending
+								Request</a></li>
+						<li><a class="nav-link" href="#/suggestionlist">Suggestion
+								List</a></li>
+					</ul>
+				</li>
+			</ul>
+			<div class="nav navbar-nav navbar-right"
+				ng-hide="currentUser==undefined" ng-controller="UserController">
+
+				<ul class="nav navbar-nav">
+					<li><a class="dropdown-toggle" data-toggle="dropdown" href=""><button
+								class="btn btn-rose btn-raised btn-round">
+								Welcome {{currentUser.loginname}} <span
+									class="glyphicon glyphicon-chevron-down"></span>
+							</button></a>
+						<ul class="dropdown-menu">
+							<li><a href="#/profilepicture"><span
+									class="glyphicon glyphicon-picture"></span> Profile Picture</a></li></li>
+					<li
+						ng-hide="currentUser==undefined||currentUser.role=='ROLE_ADMIN'"><a
+						href="#/chat"><span class="glyphicon glyphicon-envelope"></span>
+							Chat</a></li>
+				
+					<li align="center"
+						ng-show="currentUser.role=='ROLE_USER'||currentUser.role=='ROLE_ADMIN'">
+						<button value="Logout" ng-click="logout()"
+							class="btn btn-sm btn-danger">Logout</button>
+					</li>
+				</ul>
+				</li>
+
+				<li><img id="img1"
+					src="http://localhost:8080/socialmiddleware/getImage/{{currentUser.loginname}}"
+					alt="avatar" class="img-circle" onerror=this.src=
+					"avatar1.png" style="height: 50px; width: 60px"></li>
+				</ul>
+
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#/AboutUs"><i
+						class="glyphicon glyphicon-list-alt"></i> AboutUs</a></li>
+				<li><a href="#/ContactUs"><i
+						class="glyphicon glyphicon-phone-alt"></i> ContactUs</a></li>
+			</ul>
+		</div>
+	</nav>
+	<marquee>
+		<h2>
+			<font face="Comic sans MS" color="red">This Blog is all
+				about the art of learning languages </font>
+		</h2>
+	</marquee>
+	<hr>
+	<div class="container">
+		<div id="carousel-example-generic" class="carousel slide"
+			data-ride="carousel">
+
+			<!-- Indicators -->
+			<ol class="left carousel-indicators">
+				<li data-target="#carousel-example-generic" data-slide-to="0"
+					class="active"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="Images/img001.jpg" alt="...">
+				</div>
+
+				<div class="item">
+					<img src="Images/img02.jpg" alt="...">
+				</div>
+
+				<div class="item">
+					<img src="Images/img003.jpg" alt="...">
+				</div>
+			</div>
+
+			<!-- Controls -->
+			<a class="left carousel-control" href="#carousel-example-generic"
+				data-slide="prev"> <span
+				class="glyphicon glyphicon-chevron-left"></span>
+			</a> <a class="right carousel-control" href="#carousel-example-generic"
+				data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+
+		</div>
+		<hr>
+		<marquee>
+			<h4>
+				<font face="Comic sans MS" color="red">This Blog is all
+					about the art of learning languages The only thing we love more
+					than languages is helping others learn them at home, at school, at
+					the library, and beyond! Here you will learn more than thirty
+					different foreign languages </font>
+			</h4>
+		</marquee>
+		<hr>
+	</div>
+	<div ng-view></div>
+
+	<div ng-show="currentUser==undefined">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="Images/lang3.jpg" target="_blank"> <img
+							src="Images/lang3.jpg" alt="Lights" style="width: 100%">
+
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="Images/lang.jpg" target="_blank"> <img
+							src="Images/lang.jpg" alt="Nature" style="width: 100%">
+
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="Images/lang2.png" target="_blank"> <img
+							src="Images/lang2.png" alt="Fjords" style="width: 100%">
+
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+	</div>
+
+	<footer>
+		<div id="footer">
+			<div class="container">
+				<div class="bottom-bar">
+					<font color="gold"><span
+						class="glyphicon glyphicon-copyright-mark"></span> Copyright
+						&copy; Social Chat </font><font color="gold"> All Rights Reserved ©
+						2018 | </font><a href="#/AboutUs">About Us</a> | <a href="#/ContactUs">Contact
+						US</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

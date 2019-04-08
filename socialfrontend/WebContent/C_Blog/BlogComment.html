@@ -1,0 +1,60 @@
+<style>
+table {
+	border-collapse: collaspe;
+	width: 100%;
+}
+
+th, td {
+	color: black;
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+p {
+	color: Cyan;
+}
+
+hr {
+	display: block;
+	margin-top: 0.6em;
+	margin-bottom: 0.6em;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: inset;
+	border-width: 2px;
+}
+</style>
+
+<div class="container" ng-controller="BlogCommentController">
+	<p>
+		<font size="5"><b>{{blogdata.blogName}}</b></font><br> <font
+			size="3">{{blogdata.blogDesc}}</font>
+	</p>
+	<hr>
+
+
+	<div align="center">
+		<p ng-repeat="blogComment in blogCommentdata">
+			<b>{{blogComment.loginname}}</b> :{{blogComment.commentText}}
+			{{blogComment.commentDate}} <input type="button"
+				class="btn btn-sm btn-danger" value="Delete"
+				ng-show="currentUser.role=='ROLE_ADMIN'"
+				ng-click="delete(blogComment.commentId)">
+		</p>
+	</div>
+	<div ng-hide="currentUser==undefined||currentUser.role=='ROLE_ADMIN'">
+		<table align="center">
+			<tr>
+				<th>&nbsp&nbsp&nbspComment&nbsp&nbsp&nbsp</th>
+				<td><textarea cols="80" rows="2"
+						ng-model="blogComment.commentText"></textarea></td>
+			</tr>
+			<tr align="center">
+				<td colspan="2"><input value="Comment"
+					class="btn btn-sm btn-default" ng-click="addcomment()"
+					type="submit" /></td>
+			</tr>
+		</table>
+	</div>
+</div>

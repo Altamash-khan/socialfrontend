@@ -1,0 +1,40 @@
+<style>
+label {
+	color: black;
+}
+
+table {
+	border-collapse: collaspe;
+	width: 100%;
+}
+
+th, td {
+	color: black;
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+h3 {
+	color: DarkMagenta;
+}
+</style>
+<div class="container" ng-controller="ForumController">
+	<h3 align="center">Enter Forum Information</h3>
+	<hr>
+	<table align="center">
+		<tr>
+			<th>Forum Name</th>
+			<td><input type="text" name="forumName"
+				ng-model="forum.forumName" /></td>
+		</tr>
+		<tr>
+			<th>Forum Content</th>
+			<td><textarea cols="80" rows="8" ng-model="forum.forumContent"></textarea></td>
+		</tr>
+		<tr align="center">
+			<td colspan="2"><input value="Insert Forum"
+				class="btn btn-warning" ng-click="addForum()" type="submit" /></td>
+		</tr>
+	</table>
+</div>

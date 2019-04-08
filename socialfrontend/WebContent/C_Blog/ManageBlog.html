@@ -1,0 +1,49 @@
+<style>
+label {
+	color: blue;
+}
+
+}
+#table1 {
+	color: blue;
+}
+
+th td {
+	color: black;
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+</style>
+
+
+<div class="container" ng-controller="BlogController">
+	<table id=table1 class="table">
+		<tr>
+			<th>Blog Name</th>
+			<th>Login Name</th>
+			<th>Blog Description</th>
+			<th>Blog Status</th>
+			<th>Likes</th>
+			<th>Dislikes</th>
+			<th>Approve/Reject</th>
+			<th>Delete</th>
+		</tr>
+		<tr ng-repeat="blog in blogdata">
+			<td>{{blog.blogName}}</td>
+			<td>{{blog.loginname}}</td>
+			<td>{{blog.blogDesc}}</td>
+			<td>{{blog.status}}</td>
+			<td>{{blog.likes}}</td>
+			<td>{{blog.dislikes}}</td>
+			<td><input value="Approve" class="btn btn-success"
+				ng-click="approved(blog.blogId)" type="submit" />&nbsp&nbsp <input
+				value="Reject" class="btn btn-danger"
+				ng-click="rejected(blog.blogId)" type="submit" /></td>
+			<td><input value="Delete" class="btn btn-danger"
+				ng-click="deleted(blog.blogId)" type="submit" /></td>
+		</tr>
+
+	</table>
+
+</div>

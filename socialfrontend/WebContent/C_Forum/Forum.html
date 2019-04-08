@@ -1,0 +1,37 @@
+<style>
+label {
+	color: DarkBlue;
+}
+
+h2 {
+	color: black;
+}
+
+p {
+	color: black;
+}
+
+hr {
+	display: block;
+	margin-top: 0.6em;
+	margin-bottom: 0.6em;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: inset;
+	border-width: 2px;
+}
+</style>
+<div class="container" ng-controller="ForumController">
+	<p ng-repeat="forum in forumdata">
+		<font size="6" color="cyan" style="font-family:Georgia"><b>{{forum.forumname}}</b></font> &nbsp
+		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp created by <i><b><font color="DarkBlue">{{forum.loginname}}</font></b>
+			on {{forum.createDate}}</i> <img src="Images/imd.jpeg" alt="Avatar"
+			class="img-thumbnail" style="height: 30%; width: 30%"><br>
+		<br> <font size="5"style="font-family:Arial">{{forum.forumContent}}</font> &nbsp
+		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+
+		<button type="button" ng-click="showComment(forum.forumId)"
+			class="btn btn-info btn-sm">Comments</button>
+	</p>
+	<hr>
+</div>

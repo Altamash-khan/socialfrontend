@@ -1,0 +1,35 @@
+<style>
+table {
+	color:black;
+}
+</style>
+<div class="container" ng-controller="FriendController">
+
+
+	<table >
+
+		<tr ng-repeat="friend in friendList">
+
+			<td ng-hide="friend.friendLoginname==currentUser.loginname"><img
+				src="http://localhost:8080/socialmiddleware/getImage/{{friend.friendloginname}}"
+				class="img-circle" height="100px" width="100px" /></td>
+			<td ng-hide="friend.friendLoginname==currentUser.loginname">
+				<h4>&nbsp&nbsp{{friend.friendLoginname}}</h4>&nbsp&nbsp<input
+				type="button" value="Unfriend" class="btn btn-danger"
+				ng-click="unfriend(friend.friendId)" /><br>
+			</td>
+			<td ng-show="friend.friendLoginname==currentUser.loginname"><img
+				src="http://localhost:8080/socialmiddleware/getImage/{{friend.loginname}}"
+				class="img-circle" height="100px" width="100px" /></td>
+			<td ng-show="friend.friendLoginname==currentUser.loginname">
+				<h4>&nbsp&nbsp{{friend.loginname}}</h4>&nbsp&nbsp<input
+				type="button" value="Unfriend" class="btn btn-danger"
+				ng-click="unfriend(friend.friendId)" /><br>
+			</td>
+		</tr>
+
+	</table>
+
+
+
+</div>

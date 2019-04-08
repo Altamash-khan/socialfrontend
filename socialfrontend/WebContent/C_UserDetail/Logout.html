@@ -1,0 +1,81 @@
+
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+.wrapper {
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+.form-signin {
+	max-width: 420px;
+	padding: 10px 38px 66px;
+	margin: 0 auto;
+	background-color: #eee;
+	border: 3px dotted rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+}
+
+.form-signin-heading {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.form-control {
+	position: relative;
+	font-size: 16px;
+	height: auto;
+	padding: 10px;
+}
+
+input[type="text"] {
+	margin-bottom: 0px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+	margin-bottom: 20px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+</style>
+<div class="container" ng-controller="UserController">
+
+	<div class="container">
+		<div class="wrapper">
+			<form class="form-signin">
+				<h3 class="form-signin-heading">
+					<h4 class="well">
+						<center>
+							<font color="red">Successfully Logged Out</font><br />
+						</center>
+					</h4>
+					<center>
+						<img src="Images/avatar1.png" class="img-circle"
+							style="width: 100px; height: 100px" alt="Alternate Text" /> <br />
+						<b style="color: #c7c7c7 !important">Login Form</b>
+				</h3>
+				</center>
+
+				<input type="text" class="form-control" name="u_name"
+					placeholder="Username" ng-model="User.loginname" required=""
+					autofocus="" /><br /> <input type="password" class="form-control"
+					name="u_pass" placeholder="Password" ng-model="User.password"
+					required="" />
+
+				<button class="btn btn-lg btn-primary btn-block" name="Submit"
+					value="Login" type="Submit" ng-click="logincheck()">Login</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+</div>
+

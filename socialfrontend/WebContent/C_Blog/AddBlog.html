@@ -1,0 +1,45 @@
+<style>
+label {
+	color: Aqua;
+}
+
+table {
+	border-collapse: collaspe;
+	width: 100%;
+}
+
+th, td {
+	color: black;
+	padding: 15px;
+	text-align: left;
+	border-bottom: 2px solid #ddd;
+}
+
+h3 {
+	color: yellow;
+}
+</style>
+<div class="container" ng-controller="BlogController">
+	<h3 align="center">Enter New Blog Information</h3>
+	<hr>
+	
+	<table align="center">
+
+		<tr>
+			<th>Blog Name</th>
+			<td><input type="text" required="required" name="BlogName"
+				ng-model="blog.blogName" /></td>
+		</tr>
+		<tr>
+			<th>Blog Description</th>
+			<td><textarea cols="60" rows="8" required="required"
+					ng-model="blog.blogDesc"></textarea></td>
+		</tr>
+		<tr >
+		<center>	<td colspan="2"><input value="Insert blog"
+				class="btn btn-success" ng-click="addBlog()" type="submit" /></td></center>
+		</tr>
+
+	</table>
+
+</div>

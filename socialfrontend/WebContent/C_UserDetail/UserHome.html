@@ -1,0 +1,51 @@
+<style>
+label {
+	font-family: "Trebuchet MS", Verdana, Halvetica, Arial;
+	font-size: 20px;
+	color: DarkBlue;
+	display: block;
+}
+
+h2.serif {
+	color: DarkBlue;
+	font-family: "Times New Roman", Times, serif;
+}
+
+h3.sans-serif {
+	color: DarkGoldenRod;
+	font-family: "" Arial Black ", Gadget, sans-seif;
+}
+</style>
+<div ng-controller="UserController">
+	<div>
+		<div class="container">
+			<h2>
+				<center>Profile</center>
+			</h2>
+			<div class="col-md-12">
+				<div class="col-md-6">
+					<img
+						src="http://localhost:8080/socialmiddleware/getImage/{{currentUser.loginname}}"
+						width="200" height="200" class="img-responsive">
+				</div>
+				<div class="col-md-6">
+					<label>Your Name :</label>
+					<h3>{{currentUser.username}}</h3>
+					<label>User name :</label>
+					<h3>{{currentUser.loginname}}</h3>
+					<label>Email Id :</label>
+					<h3>{{currentUser.emailid}}</h3>
+					<label>Mobile Number:</label>
+					<h3>{{currentUser.mobileno}}</h3>
+					<label>Address :</label>
+					<h3>{{currentUser.address}}</h3>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<!-- <img src="http://localhost:8080/socialmiddleware/getImage/{{currentUser.loginname}}" width="250" height="250" class="img-responsive"> -->
